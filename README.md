@@ -97,6 +97,24 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
 
+## ¿Qué es un Controller en NestJS?
+
+Un **controller** en NestJS es una clase responsable de manejar las solicitudes entrantes y devolver respuestas al cliente. Los controllers definen rutas y métodos HTTP (GET, POST, PUT, DELETE, etc.) y actúan como punto de entrada para la lógica de negocio de la aplicación. Por ejemplo, un controller de usuarios puede exponer rutas como `/users` para obtener, crear o modificar usuarios.
+
+Ejemplo de uso:
+
+```typescript
+@Controller('users')
+export class UsersController {
+  @Get()
+  findAll() {
+    return 'Este endpoint retorna todos los usuarios';
+  }
+}
+```
+
+---
+
 ## Generar un Controller con NestJS
 
 NestJS proporciona un comando muy útil para generar controllers automáticamente:

@@ -101,6 +101,8 @@ Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
 
 Un **controller** en NestJS es una clase responsable de manejar las solicitudes entrantes y devolver respuestas al cliente. Los controllers definen rutas y métodos HTTP (GET, POST, PUT, DELETE, etc.) y actúan como punto de entrada para la lógica de negocio de la aplicación. Por ejemplo, un controller de usuarios puede exponer rutas como `/users` para obtener, crear o modificar usuarios.
 
+El string `'users'` en `@Controller('users')` indica que todas las rutas definidas en ese controller estarán bajo el endpoint `/users`.
+
 Ejemplo de uso:
 
 ```typescript

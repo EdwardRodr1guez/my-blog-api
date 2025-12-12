@@ -96,3 +96,27 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+## Generar un Controller con NestJS
+
+NestJS proporciona un comando muy útil para generar controllers automáticamente:
+
+```bash
+nest g controller <nombre-del-controller>
+```
+
+Por ejemplo, si deseas crear un controller para usuarios:
+
+```bash
+nest g controller users
+```
+
+Esto generará los siguientes archivos y actualizará el módulo principal automáticamente:
+
+```
+CREATE src/users/users.controller.spec.ts (485 bytes)
+CREATE src/users/users.controller.ts (99 bytes)
+UPDATE src/app.module.ts (326 bytes)
+```
+
+Así, tendrás el archivo de pruebas, el controller y verás cómo se actualiza el `app.module.ts` para registrar el nuevo controller.

@@ -6,7 +6,7 @@ interface User {
   email: string;
 }
 
-@Controller('users')
+@Controller('users') // Ruta base: /users
 export class UsersController {
   private users: User[] = [
     { id: '1', name: 'Alice', email: 'alice@example.com' },

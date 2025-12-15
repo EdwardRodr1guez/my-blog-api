@@ -1,31 +1,22 @@
 import { Controller, Get, Param, NotFoundException, Post, Body, Delete, Put, UnprocessableEntityException } from '@nestjs/common';
 import { CreateUserDto } from './create-user.dto';
 import { UpdateUserDto } from './update-user.dto';
-
-interface User {
-  id: string;
-  name: string;
-  email: string;
-}
+import type { User } from './user.model';
+import { UsersService } from './users.service';
 
 @Controller('users') // Ruta base: /users
 export class UsersController {
-  private users: User[] = [
-    { id: '1', name: 'Alice', email: 'alice@example.com' },
-    { id: '2', name: 'Bob', email: 'bob@example.com' },
-    { id: '3', name: 'Charlie', email: 'charlie@example.com' },
-  ];
-
+  constructor(private readonly usersService: UsersService) {}
   // El decorador @Get() sin parámetros hace que este método responda a la ruta /users
   // Si quieres que responda a /users/getAllUsers, usa @Get('getAllUsers')
   @Get()
   getAllUsers(): User[] {
-    return this.users;
+    return this.usersService.findAll();
   }
   // Ejemplo http://localhost:4000/users/1
   @Get(':id')
   findUser(@Param('id') id: string): User {
-    const user = this.users.find((user) => user.id === id);
+    const user = this.usersService.findOne(id);
     if (!user) {
       throw new NotFoundException('User not found');
     }
@@ -34,25 +25,20 @@ export class UsersController {
   @Post()
   createUser(@Body() body: CreateUserDto): User {
     // El id se genera automáticamente
-    const newUser: User = {
-      ...body,
-      id: `${this.users.length + 1}`,
-    };
-    this.users.push(newUser);
-    return newUser;
+    return this.usersService.create(body);
   }
+
   @Delete(':id')
   deleteUser(@Param('id') id: string): { message: string } {
-    const index = this.users.findIndex((user) => user.id === id);
-    if (index === -1) {
+    const deleted = this.usersService.delete(id);
+    if (!deleted) {
       throw new NotFoundException('User not found');
     }
-    this.users = this.users.filter((user) => user.id !== id);
     return { message: 'User deleted successfully' };
   }
   @Put(':id')
   updateUser(@Param('id') id: string, @Body() body: UpdateUserDto): User {
-    const user = this.users.find((user) => user.id === id);
+    const user = this.usersService.update(id, body);
     if (!user) {
       throw new NotFoundException('User not found');
     }

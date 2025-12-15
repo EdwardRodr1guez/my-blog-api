@@ -1,4 +1,4 @@
-import { Controller, Get, Param, NotFoundException, Post, Body } from '@nestjs/common';
+import { Controller, Get, Param, NotFoundException, Post, Body, Delete } from '@nestjs/common';
 
 interface User {
   id: string;
@@ -33,5 +33,14 @@ export class UsersController {
   createUser(@Body() body: User): User {
     this.users.push(body);
     return body;
+  }
+  @Delete(':id')
+  deleteUser(@Param('id') id: string): { message: string } {
+    const index = this.users.findIndex((user) => user.id === id);
+    if (index === -1) {
+      throw new NotFoundException('User not found');
+    }
+    this.users = this.users.filter((user) => user.id !== id);
+    return { message: 'User deleted successfully' };
   }
 }

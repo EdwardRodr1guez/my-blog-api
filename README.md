@@ -146,6 +146,7 @@ Así, tendrás el archivo de pruebas, el controller y verás cómo se actualiza 
 
 ## Validación y transformación de DTOs en NestJS
 
+
 Para validar y transformar datos en tus controladores usando DTOs, instala las siguientes dependencias:
 
 ```bash
@@ -171,3 +172,21 @@ export class CreateUserDto {
 ```
 
 Luego, puedes usar este DTO en tus controladores para validar automáticamente los datos recibidos.
+
+
+### Habilitar validación automática de DTOs
+
+Para que la validación de los DTOs funcione automáticamente en todos los endpoints, debes habilitar el ValidationPipe global en tu archivo `main.ts`:
+
+```typescript
+import { ValidationPipe } from '@nestjs/common';
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  app.useGlobalPipes(new ValidationPipe());
+  await app.listen(3000);
+}
+bootstrap();
+```
+
+Esto hará que cualquier DTO que uses en tus controladores sea validado automáticamente según los decoradores de `class-validator`.

@@ -20,12 +20,8 @@ export class UsersController {
   getAllUsers(): User[] {
     return this.users;
   }
-
+  // Ejemplo http://localhost:4000/users/1
   @Get(':id')
-  findUser(@Param('id') id: string): {
-      return this.users.find((user) => user.id === id);
-    }
-  }
   findUser(@Param('id') id: string): User | undefined {
     return this.users.find((user) => user.id === id);
   }

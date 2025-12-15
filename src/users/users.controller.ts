@@ -1,4 +1,4 @@
-import { Controller, Get, Param, NotFoundException, Post, Body, Delete, Put } from '@nestjs/common';
+import { Controller, Get, Param, NotFoundException, Post, Body, Delete, Put, UnprocessableEntityException } from '@nestjs/common';
 
 interface User {
   id: string;
@@ -53,6 +53,9 @@ export class UsersController {
     const user = this.users.find((user) => user.id === id);
     if (!user) {
       throw new NotFoundException('User not found');
+    }
+    if (body.email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(body.email)) {
+      throw new UnprocessableEntityException('Email inválido');
     }
     Object.assign(user, body);
     return user;

@@ -1,5 +1,6 @@
 import { Controller, Get, Param, NotFoundException, Post, Body, Delete, Put, UnprocessableEntityException } from '@nestjs/common';
-import { CreateUserDto } from './user.dto';
+import { CreateUserDto } from './create-user.dto';
+import { UpdateUserDto } from './update-user.dto';
 
 interface User {
   id: string;
@@ -50,7 +51,7 @@ export class UsersController {
     return { message: 'User deleted successfully' };
   }
   @Put(':id')
-  updateUser(@Param('id') id: string, @Body() body: Partial<User>): User {
+  updateUser(@Param('id') id: string, @Body() body: UpdateUserDto): User {
     const user = this.users.find((user) => user.id === id);
     if (!user) {
       throw new NotFoundException('User not found');

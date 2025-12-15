@@ -1,4 +1,5 @@
 import { Controller, Get, Param, NotFoundException, Post, Body, Delete, Put, UnprocessableEntityException } from '@nestjs/common';
+import { CreateUserDto } from './user.dto';
 
 interface User {
   id: string;
@@ -30,9 +31,9 @@ export class UsersController {
     return user;
   }
   @Post()
-  createUser(@Body() body: User): User {
-    // el id se debe pasar internamiente o generarse automáticamente
-    const newUser = {
+  createUser(@Body() body: CreateUserDto): User {
+    // El id se genera automáticamente
+    const newUser: User = {
       ...body,
       id: `${this.users.length + 1}`,
     };

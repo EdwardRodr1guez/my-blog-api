@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 
 interface User {
   id: string;
@@ -19,5 +19,14 @@ export class UsersController {
   @Get()
   getAllUsers(): User[] {
     return this.users;
+  }
+
+  @Get(':id')
+  findUser(@Param('id') id: string): {
+      return this.users.find((user) => user.id === id);
+    }
+  }
+  findUser(@Param('id') id: string): User | undefined {
+    return this.users.find((user) => user.id === id);
   }
 }

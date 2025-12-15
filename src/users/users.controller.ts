@@ -1,4 +1,4 @@
-import { Controller, Get, Param, NotFoundException, Post, Body, Delete } from '@nestjs/common';
+import { Controller, Get, Param, NotFoundException, Post, Body, Delete, Put } from '@nestjs/common';
 
 interface User {
   id: string;
@@ -31,8 +31,13 @@ export class UsersController {
   }
   @Post()
   createUser(@Body() body: User): User {
-    this.users.push(body);
-    return body;
+    // el id se debe pasar internamiente o generarse automáticamente
+    const newUser = {
+      ...body,
+      id: `${this.users.length + 1}`,
+    };
+    this.users.push(newUser);
+    return newUser;
   }
   @Delete(':id')
   deleteUser(@Param('id') id: string): { message: string } {
@@ -42,5 +47,14 @@ export class UsersController {
     }
     this.users = this.users.filter((user) => user.id !== id);
     return { message: 'User deleted successfully' };
+  }
+  @Put(':id')
+  updateUser(@Param('id') id: string, @Body() body: Partial<User>): User {
+    const user = this.users.find((user) => user.id === id);
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    Object.assign(user, body);
+    return user;
   }
 }

@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, NotFoundException, Post, Body } from '@nestjs/common';
 
 interface User {
   id: string;
@@ -22,7 +22,16 @@ export class UsersController {
   }
   // Ejemplo http://localhost:4000/users/1
   @Get(':id')
-  findUser(@Param('id') id: string): User | undefined {
-    return this.users.find((user) => user.id === id);
+  findUser(@Param('id') id: string): User {
+    const user = this.users.find((user) => user.id === id);
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    return user;
+  }
+  @Post()
+  createUser(@Body() body: User): User {
+    this.users.push(body);
+    return body;
   }
 }

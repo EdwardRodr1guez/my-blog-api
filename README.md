@@ -119,6 +119,8 @@ export class UsersController {
 
 ## Generar un Controller con NestJS
 
+
+
 NestJS proporciona un comando muy útil para generar controllers automáticamente:
 
 ```bash
@@ -140,3 +142,32 @@ UPDATE src/app.module.ts (326 bytes)
 ```
 
 Así, tendrás el archivo de pruebas, el controller y verás cómo se actualiza el `app.module.ts` para registrar el nuevo controller.
+
+
+## Validación y transformación de DTOs en NestJS
+
+Para validar y transformar datos en tus controladores usando DTOs, instala las siguientes dependencias:
+
+```bash
+npm i --save class-validator class-transformer @nestjs/mapped-types
+```
+
+- **class-validator**: Permite usar decoradores como `@IsEmail`, `@IsString`, etc., para validar automáticamente los datos recibidos en los DTOs.
+- **class-transformer**: Permite transformar y convertir objetos, por ejemplo, convertir strings a números o excluir campos.
+- **@nestjs/mapped-types**: Proporciona utilidades como `PartialType`, `PickType` y `OmitType` para crear DTOs basados en otros DTOs de forma sencilla.
+
+Ejemplo de DTO con validación:
+
+```typescript
+import { IsEmail, IsString } from 'class-validator';
+
+export class CreateUserDto {
+  @IsString()
+  name: string;
+
+  @IsEmail()
+  email: string;
+}
+```
+
+Luego, puedes usar este DTO en tus controladores para validar automáticamente los datos recibidos.

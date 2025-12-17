@@ -224,3 +224,27 @@ Esto permite que toda la lógica relacionada con usuarios esté agrupada y sea f
 
 
 # 2. Base de Datos y Persistencia con TypeORM
+
+
+## Base de datos local con Docker Compose
+
+Para levantar un servicio de base de datos Postgres para desarrollo local, asegúrate de tener Docker instalado y ejecuta:
+
+```bash
+docker compose up -d
+```
+
+Esto creará y levantará un contenedor de Postgres con los siguientes datos por defecto (definidos en `docker-compose.yml`):
+
+- Usuario: `mybloguser`
+- Contraseña: `myblogpass`
+- Base de datos: `myblogdb`
+- Puerto local: `5432`
+
+Puedes modificar estos valores en el archivo `docker-compose.yml` según tus necesidades.
+
+Para detener los servicios, ejecuta:
+
+```bash
+docker compose down
+```

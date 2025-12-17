@@ -275,3 +275,12 @@ Pasos para usar pgAdmin:
 7. Guarda y ya podrás explorar y administrar la base de datos desde la interfaz de pgAdmin.
 
 Esto facilita la gestión visual de tus datos y la administración de tu base de datos durante el desarrollo.
+
+
+## Relación entre Docker/Postgres, pgAdmin y TypeORM
+
+- **Docker + Postgres:** Proporciona la base de datos real, corriendo en un contenedor. Aquí se almacenan todos los datos de la aplicación.
+- **pgAdmin:** Es una interfaz visual para administrar y explorar la base de datos Postgres de forma gráfica, útil para desarrolladores y DBAs.
+- **TypeORM:** Es una librería de Node.js/NestJS que permite interactuar con la base de datos desde el código, usando clases y métodos en lugar de escribir SQL manualmente. TypeORM traduce las operaciones de tu código a consultas SQL y las ejecuta en la base de datos Postgres que corre en Docker.
+
+En resumen: Docker/Postgres es la base de datos, pgAdmin es la interfaz visual, y TypeORM es el puente entre tu aplicación NestJS y la base de datos, facilitando el acceso y manipulación de los datos desde el código.

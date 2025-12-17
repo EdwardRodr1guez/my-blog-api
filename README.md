@@ -1,3 +1,4 @@
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>
@@ -190,3 +191,30 @@ bootstrap();
 ```
 
 Esto hará que cualquier DTO que uses en tus controladores sea validado automáticamente según los decoradores de `class-validator`.
+
+
+
+
+## Modularización de la funcionalidad de usuarios
+
+Para mantener el proyecto organizado y escalable, se creó un módulo específico para la funcionalidad de usuarios:
+
+1. **Creación del módulo de usuarios:**
+  ```bash
+  nest g module users
+  ```
+  Esto genera el archivo `src/users/users.module.ts`.
+
+2. **Registro del módulo en AppModule:**
+  En `src/app.module.ts` se importa y agrega `UsersModule` en la sección `imports`:
+  ```typescript
+  import { UsersModule } from './users/users.module';
+
+  @Module({
+    imports: [ConfigModule.forRoot({ isGlobal: true }), UsersModule],
+    // ...controllers y providers
+  })
+  export class AppModule {}
+  ```
+
+Esto permite que toda la lógica relacionada con usuarios esté agrupada y sea fácilmente escalable o reutilizable en otros contextos.

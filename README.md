@@ -98,6 +98,9 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
 
+
+# 1. Fundamentos de nest y mi primer CRUD
+
 ## ¿Qué es un Controller en NestJS?
 
 Un **controller** en NestJS es una clase responsable de manejar las solicitudes entrantes y devolver respuestas al cliente. Los controllers definen rutas y métodos HTTP (GET, POST, PUT, DELETE, etc.) y actúan como punto de entrada para la lógica de negocio de la aplicación. Por ejemplo, un controller de usuarios puede exponer rutas como `/users` para obtener, crear o modificar usuarios.
@@ -218,3 +221,6 @@ Para mantener el proyecto organizado y escalable, se creó un módulo específic
   ```
 
 Esto permite que toda la lógica relacionada con usuarios esté agrupada y sea fácilmente escalable o reutilizable en otros contextos.
+
+
+# 2. Base de Datos y Persistencia con TypeORM

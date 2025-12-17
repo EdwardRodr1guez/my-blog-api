@@ -248,3 +248,30 @@ Para detener los servicios, ejecuta:
 ```bash
 docker compose down
 ```
+
+
+### Administración visual con pgAdmin
+
+El archivo `docker-compose.yml` también incluye un servicio opcional llamado **pgAdmin**, una herramienta web para administrar y visualizar bases de datos PostgreSQL de forma gráfica.
+
+Pasos para usar pgAdmin:
+
+1. Asegúrate de que los servicios estén levantados con:
+  ```bash
+  docker compose up -d
+  ```
+2. Accede a pgAdmin desde tu navegador en [http://localhost:5050](http://localhost:5050)
+3. Inicia sesión con:
+  - **Email:** `admin@myblog.com`
+  - **Password:** `admin_password`
+4. Una vez dentro, haz clic derecho en "Servers" y selecciona "Register > Server..." para agregar una nueva conexión.
+5. En la pestaña "General", ponle un nombre (ejemplo: `Local Postgres`).
+6. En la pestaña "Connection", usa los datos definidos en el `docker-compose.yml`:
+  - **Host:** `postgres` (nombre del servicio Docker)
+  - **Port:** `5432`
+  - **Username:** `blog_user`
+  - **Password:** `blog_password`
+  - **Database:** `my_blog_db`
+7. Guarda y ya podrás explorar y administrar la base de datos desde la interfaz de pgAdmin.
+
+Esto facilita la gestión visual de tus datos y la administración de tu base de datos durante el desarrollo.
